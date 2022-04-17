@@ -32,28 +32,27 @@ class BaseService {
         $app = config('APP');
         $user = config('USER');
         $pass = config('PASS');
-        $lang = congig('LANG');
+        $lang = config('LANG');
                
         $client = new Client();
         $response = $client->request('POST', 'https://demodb.my.erp.net/api/domain/Login', [
-            'form_params' => [
-                'app' => '$app',
-                'user' => '$user',
-                'password' => '$pass',
-                'lang' => '$lang',
-            ]
-        ]);
-        
-        // headers: 'Content-Type' => 'application'/json
-        // session 
+            'headers' => ['Content-Type' => 'application/json', 'Accept' => 'application/json'],
+            'body'    => '{"user":"Admin", "pass":"123"}'
+        ]);     
 
-        $result = $response->getBody();
+        $result = $response->getBody()->getContents();
         dd($result);
+        
+        dd($response);
         
     }
     
     private function logout() {
         //TODO implement logout functionality
+        $client = new Client();
+        $response = $client->request('POST', 'https://demodb.my.erp.net/api/domain/Logout');
+        
+        // unset sessionId
     }
 
 } 
