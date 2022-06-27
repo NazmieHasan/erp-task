@@ -14,9 +14,7 @@ use App\Http\Controllers\UserAuth;
 |
 */
 
-Route::get('/', function() {} );
-
-Route::get('/gifs', 'GiphyController@getGifs');
+Route::get('/', 'GiphyController@getGifs' );
 
 Route::get('/gif-detail/{id}', 'GiphyController@getOneGif');
 
